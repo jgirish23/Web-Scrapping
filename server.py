@@ -5,8 +5,8 @@ import scrapper
 import os
 import json
 from datetime import date
-dt=date.today().strftime("%d%m%y")
-
+import schedule
+import time
 
 con = sql.connect('database.db',check_same_thread=False)
 con.execute("CREATE TABLE IF NOT EXISTS articles(id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT,link TEXT,author TEXT type UNIQUE,datenow TEXT);")
@@ -48,13 +48,14 @@ def Current_Day():
     scrapper.main()
     Background_Script()
 
+schedule.every().day.at("18:35").do(Current_Day)
+
+    
 @app.route('/')
 def home():
     Current_Day()
     conn = get_db_connection()
     data = conn.execute('SELECT * FROM articles').fetchall()
-    # d=conn.execute('SELECT * FROM articles WHERE id=? ', '2').fetchall()
-    # print(len(d))
     conn.close()
     _json=[]
     key=["id","title","link","author","datenow"]
@@ -65,7 +66,7 @@ def home():
             item[key[ct]]=j
             ct+=1
         _json.append(item)
-    print(_json)
+    # print(_json)
     return jsonify(_json)
 
 
