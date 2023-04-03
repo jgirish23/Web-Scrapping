@@ -7,7 +7,8 @@ import json
 from datetime import date
 import schedule
 import time
-
+today=date.today()
+dt=today.strftime("%d%m%y")
 con = sql.connect('database.db',check_same_thread=False)
 con.execute("CREATE TABLE IF NOT EXISTS articles(id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT,link TEXT,author TEXT type UNIQUE,datenow TEXT);")
 con.close()
@@ -20,7 +21,7 @@ def get_db_connection():
 
 def Background_Script():
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    json_data = os.path.join(SITE_ROOT, "./JSON_Data/", f"{dt}_verge.json")
+    json_data = os.path.join(SITE_ROOT, "JSON_Data", f"{dt}_verge.json")
     data = json.load(open(json_data))
     print("Data extracted")
     try:
@@ -46,6 +47,7 @@ def Background_Script():
 
 def Current_Day():
     scrapper.main()
+    # time.sleep(20)
     Background_Script()
 
 schedule.every().day.at("18:35").do(Current_Day)

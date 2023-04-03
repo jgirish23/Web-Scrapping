@@ -47,8 +47,8 @@ def main():
         store.append(data)
 
     # print(store)
-    print(d)
-    with open(f"./JSON_Data/{d}.json",'w') as file:
+    # print(d)
+    with open(f"./JSON_Data/{d}_verge.json",'w') as file:
         json.dump(store,file,indent=4)
 
     with open(f"./ScrappedData/{d}_verge", 'w') as file:
