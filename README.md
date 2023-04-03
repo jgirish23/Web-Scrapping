@@ -3,6 +3,8 @@
 ## Screenshots
 
 ## Tech Stack
+![1](https://user-images.githubusercontent.com/76240891/229565505-aa105d47-db2d-4a7e-b37c-0383a760190a.jpg)
+![2](https://user-images.githubusercontent.com/76240891/229565546-160c65f8-d741-4455-8d25-4a5758a7e246.jpg)
 
 **-** Flask
 
